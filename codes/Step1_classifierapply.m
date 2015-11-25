@@ -18,8 +18,8 @@ param.f_lowpass = 30;
 param.num_permutations = 100;
 param.trial_bin_size = 27;
 
-condA = {'Session1_All_t1'}; %use brackets to support multiple conditions, say condA = {'faces','houses'};
-condB = {'Session1_All_t2'};
+condA = {'Session1_Hard_36_40'}; %use brackets to support multiple conditions, say condA = {'faces','houses'};
+condB = {'Session1_Easy_10_34'};
 
 %Run SVM analysis
 for i = 1:length(SubjectNames) %for all subjects
@@ -27,10 +27,9 @@ for i = 1:length(SubjectNames) %for all subjects
     [accuracy,Time] = svm_contrast_conditions_perm(SubjectNames{i},condA,condB,param);
     Accuracy(i,:) = accuracy; %store decoding accuracy for all subjects
 end
-save('Results/Accuracy','Accuracy','Time','param');
+save('Results/Mat_DecodingAccuracy/Camera_06_Hard_versus_Easy','Accuracy','Time','param');
 
 %plot results
-load('Results/Accuracy')
 figure; 
 plot(Time, mean(Accuracy,1));
 set(gca,'fontsize',12);
