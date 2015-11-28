@@ -9,7 +9,7 @@ addpath(genpath('Functions'));
 disp(pwd);
 nSubjects = 1;
 
-SubjectNames = {'Camera_06'}; %for more subjects use SubjectNames = {'Subject01' 'Subject02'}; etc
+SubjectNames = {'Camera_07'}; %for more subjects use SubjectNames = {'Subject01' 'Subject02'}; etc
 
 %parameters
 param.brainstorm_db = [pwd '/brainstorm_db/camera/data/']; %directory of 'data' folder
@@ -18,21 +18,15 @@ param.f_lowpass = 30;
 param.num_permutations = 100;
 param.trial_bin_size = 27;
 
-condA = {'Session1_Hard_36_40'}; %use brackets to support multiple conditions, say condA = {'faces','houses'};
-condB = {'Session1_Easy_10_34'};
+condA = {{'S1_t1'},{'S1_Red'},{'S2_t1'},{'S2_Red'}}; %use brackets to support multiple conditions, say condA = {'faces','houses'};
+condB = {{'S1_t2'},{'S1_Blue'},{'S2_t2'},{'S2_Blue'}};
 
 %Run SVM analysis
 for i = 1:length(SubjectNames) %for all subjects
-
-    [accuracy,Time] = svm_contrast_conditions_perm(SubjectNames{i},condA,condB,param);
-    Accuracy(i,:) = accuracy; %store decoding accuracy for all subjects
+        for cond = 3:3
+            [accuracy,Time] = svm_contrast_conditions_perm(SubjectNames{i},condA{cond},condB{cond},param);
+            Accuracy(i,:) = accuracy; %store decoding accuracy for all subjects
+            save(char(strcat('Results/Mat_DecodingAccuracy/',...
+                 SubjectNames{i},'_',condA{cond},'_versus_',condB{cond})),'Accuracy','Time','param');
+        end
 end
-save('Results/Mat_DecodingAccuracy/Camera_06_Hard_versus_Easy','Accuracy','Time','param');
-
-%plot results
-figure; 
-plot(Time, mean(Accuracy,1));
-set(gca,'fontsize',12);
-ylabel('Accuracy (%)','fontsize',14)
-xlabel('Time (sec)','fontsize',14)
-print(gcf,['Results/AverageAccuracy.png'],'-dpng','-r300');
