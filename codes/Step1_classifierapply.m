@@ -18,12 +18,12 @@ param.f_lowpass = 30;
 param.num_permutations = 100;
 param.trial_bin_size = 27;
 
-condA = {{'S1_t1'},{'S1_Red'},{'S2_t1'},{'S2_Red'}}; %use brackets to support multiple conditions, say condA = {'faces','houses'};
-condB = {{'S1_t2'},{'S1_Blue'},{'S2_t2'},{'S2_Blue'}};
+condA = {{'S1_t1'},{'S1_Red'},{'S2_t1'},{'S2_Red'},{'S1_Easy_10_28'},{'S2_Easy_10_28'}}; %use brackets to support multiple conditions, say condA = {'faces','houses'};
+condB = {{'S1_t2'},{'S1_Blue'},{'S2_t2'},{'S2_Blue'},{'S1_Hard_30_34'},{'S2_Hard_30_36'}};
 
 %Run SVM analysis
 for i = 1:length(SubjectNames) %for all subjects
-        for cond = 3:3
+        for cond = 5:6
             [accuracy,Time] = svm_contrast_conditions_perm(SubjectNames{i},condA{cond},condB{cond},param);
             Accuracy(i,:) = accuracy; %store decoding accuracy for all subjects
             save(char(strcat('Results/Mat_DecodingAccuracy/',...

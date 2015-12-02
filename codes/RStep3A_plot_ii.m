@@ -29,7 +29,7 @@ YMIN = 20; YMAX = 100; YMIN_CO = -25; YMAX_CO = 40;
 %% list file
 mat_location = '/dataslow/sheng/Camera/Results/Mat_DecodingAccuracy/';
 fig_location = '/dataslow/sheng/Camera/Results/Fig_DecodingAccuracy/';
-file = dir([mat_location '*07*.mat']); 
+file = dir([mat_location '2Camera*.mat']); 
 
 %% Draw all
 for i=1:length(file)
