@@ -53,7 +53,8 @@ f_lowpass = param.f_lowpass;
 SensorMode = param.SensorMode;
 SensorNames = param.SensorNames;
 
-flag_B = str2num(conditionsB{1}); % whether to load the second condition trials
+flag_B = 0;
+flag_B = length(conditionsB{1}); % whether to load the second condition trials
 
 %% find proper channels
 if ~strcmp(SensorMode([1:3]),'sco') % if it is not scout(source level)

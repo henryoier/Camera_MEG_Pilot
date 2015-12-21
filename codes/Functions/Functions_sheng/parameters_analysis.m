@@ -9,7 +9,7 @@ end
 if clusterflag
     param.brainstorm_db = ['[CLUSTER PATH]' ProjectName '/data'];
 else
-    param.brainstorm_db = ['/dataslow/sheng/Project of Sheng/brainstorm_db/' ProjectName '/data'];
+    param.brainstorm_db = ['/dataslow/sheng/Camera/brainstorm_db/' ProjectName '/data'];
 end
 
 param.data_type = 'MEG';
@@ -30,7 +30,7 @@ param.RhythmMode = RhythmMode;
 %                   352 trials -> 200Hz LP filter -> std -> induced -> time-frequency (SVM vector *5 / *5 / *1) -> average every 87 trials -> percentage -> SVM (3 train, 1 test)
 
 switch RhythmMode
-    case {'evoked'}
+    case {'evoked','total'}
     case {'1_100'}  % for RStep0 ryhthm analysis, 1~100Hz
         OPTIONS.Freqs = [1:100];
     case {'vectorlow', 'ivectorlow', 'evectorlow'}      % total/induced/evoked low vector gamma frequency
