@@ -88,7 +88,7 @@ for c = 1:n_conditions
     if strcmp(SensorMode([1:3]),'sco')
         fA = dir([brainstorm_db '/' subject '/' conditionsA{c} '/matrix_scout_*.mat']);
     else
-        fA = dir([brainstorm_db '/' subject '/' conditionsA{c} '/*trial*.mat']);
+        fA = dir([brainstorm_db '/' subject '/' conditionsA{c} '/data*trial*.mat']);
     end
     
     %if (~size(fA,1)) error('myError: No files while loading trials A'); end
@@ -97,7 +97,7 @@ for c = 1:n_conditions
         if strcmp(SensorMode([1:3]),'sco')
             fB = dir([brainstorm_db '/' subject '/' conditionsB{c} '/matrix_scout_*.mat']);
         else
-            fB = dir([brainstorm_db '/' subject '/' conditionsB{c} '/*trial*.mat']);
+            fB = dir([brainstorm_db '/' subject '/' conditionsB{c} '/data*trial*.mat']);
         end
     end
     

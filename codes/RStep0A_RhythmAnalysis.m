@@ -28,14 +28,14 @@ function RStep0A_RhythmAnalysis(in_subject)
 clc;
 in_subject = 6;
 addpath(genpath('Functions'));
-results_location = ['Results/sheng/Fig0_Timefreq'];
+results_location = ['dataslow/sheng/Camera/Results/Fig_Timefreq'];
 ProjectName = 'camera'; 
 RhythmMode = '1_100'; 
 % conditions = {{'1'}};
 conditions = {{'S1_t1'},{'S1_Red'},{'S2_t1'},{'S2_Red'},{'S1_Easy_10_28'},{'S2_Easy_10_28'}};
 ndx_trials = []; % Index of trials while reading parts of trials; Read all trials if it is '[]';
 
-%startmatlabpool(48); %parallel computation
+startmatlabpool(24); %parallel computation
 
 for i_subject = in_subject
     
@@ -65,7 +65,7 @@ for i_subject = in_subject
         % The function of load_trials can load one subject, two conditions'
         % data, {'0'} means only to load one condition while ignoring the
         % second condition.
-        [trials,param] = load_trials(param.brainstorm_db,SubjectName,conditions{i_condition},{'0'},param,ndx_trials);
+        [trials,param] = load_trials(param.brainstorm_db,SubjectName,conditions{i_condition},{{}},param,ndx_trials);
         Time = param.Time;
         n_trials = length(trials); % n_trials: number of trials
         p.n_trials = n_trials;
@@ -136,5 +136,5 @@ for i_subject = in_subject
     end
 end
 
-%closematlabpool;
+closematlabpool;
 disp('All finished!');
